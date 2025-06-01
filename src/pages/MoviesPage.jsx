@@ -3,6 +3,8 @@ import { useSearchParams } from "react-router-dom";
 import { searchMovies } from "../api/tmdb";
 import MovieList from "../components/MovieList";
 import Loader from "../components/Loader/Loader";
+import { toast } from "react-toastify";
+import CSS from "../App.module.css";
 
 const MoviesPage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -16,7 +18,13 @@ const MoviesPage = () => {
       setLoading(true);
       try {
         const response = await searchMovies(query);
-        setMovies(response.data.results);
+        const results = response.data.results;
+        if (response.data.results.length === 0) {
+          toast.info("No movies found for your search query.");
+        } else {
+          toast.success(`Found ${response.data.results.length} movies.`);
+        }
+        setMovies(results);
       } catch (error) {
         setError("Failed to fetch movies");
         console.error("Error fetching movies:", error);
@@ -31,15 +39,15 @@ const MoviesPage = () => {
     e.preventDefault();
     const form = e.currentTarget;
     const input = form.elements.query.value.trim();
-    if (!query) return;
+    if (!input) return;
     setSearchParams({ query: input });
     form.reset();
   };
 
   return (
-    <main>
+    <main className={CSS.movies_page}>
       <h1>Search Movies</h1>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className={CSS.search_form}>
         <input name="query" type="text" placeholder="Search movies" />
         <button type="submit">Search Movies</button>
       </form>

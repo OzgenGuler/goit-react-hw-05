@@ -3,8 +3,7 @@
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  padding: 1rem;
-  background-color: #f8f9fa;
+  background-color: #f8f9fa42;
   border-radius: 10px;
   border: 1px solid #dee2e6;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -25,9 +24,7 @@
 .nav_list {
   display: flex;
   list-style: none;
-  gap: 1rem;
-  padding: 0;
-  margin: 0;
+  gap: 25px;
 }
 
 .nav_link {
@@ -36,6 +33,6 @@
   font-weight: bold;
   transition: color 0.3s ease;
 }
-.nav_link:hover {
+.nav_list li:focus {
   color: #007bff;
 }

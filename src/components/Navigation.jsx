@@ -13,11 +13,11 @@ const Navigation = () => {
               color: isActive ? "red" : "black",
               textDecoration: isActive ? "underline" : "none",
               hover: {
-                color: "yellow  ",
+                color: "brown  ",
               },
             })}
           >
-            Home
+            Home Page
           </NavLink>
         </li>
         <li>
